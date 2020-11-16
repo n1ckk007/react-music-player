@@ -1,4 +1,5 @@
 import React from "react";
+import "./Song.scss";
 
 const Song = () => {
   return (

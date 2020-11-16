@@ -5,6 +5,7 @@ import {
   faAngleRight,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
+import "./Controls.scss";
 
 const Controls = () => {
   return (
