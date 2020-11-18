@@ -9,11 +9,17 @@ function App() {
   const [songs, setSongs] = useState(data());
   // grabs first song from array of objects
   const [currentSong, setCurrentSong] = useState(songs[0]);
+  // state for if the music is playing
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <div className="App">
       <Song currentSong={currentSong} />
-      <Controls />
+      <Controls
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentSong={currentSong}
+      />
     </div>
   );
 }
