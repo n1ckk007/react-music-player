@@ -8,10 +8,7 @@ import {
 import "./Controls.scss";
 
 const Controls = ({ currentSong, isPlaying, setIsPlaying }) => {
-  const [songInfo, setSongInfo] = useState({
-    currentTime: null,
-    duration: null,
-  });
+  const [songInfo, setSongInfo] = useState({ currentTime: 0, duration: 0 });
   // Ref
   const audioRef = useRef(null);
 
@@ -45,12 +42,28 @@ const Controls = ({ currentSong, isPlaying, setIsPlaying }) => {
     );
   };
 
+  // to make slider draggable
+  const dragHandler = (e) => {
+    // console.log(e.target.value);
+    // updates the <audio>
+    audioRef.current.currentTime = e.target.value;
+    // whatever we had, keep it but update the current time
+    // setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
+
   return (
     <div className="controls-container">
       <div className="time-control">
         {/* envoke the getTime func and pass down current time */}
         <p>{getTime(songInfo.currentTime)}</p>
-        <input type="range" />
+        <input
+          min={0}
+          max={songInfo.duration}
+          value={songInfo.currentTime}
+          type="range"
+          // everytime we move slider this event will run
+          onChange={dragHandler}
+        />
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-control">
