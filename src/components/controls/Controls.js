@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -26,6 +26,14 @@ const Controls = ({ currentSong, isPlaying, setIsPlaying }) => {
       setIsPlaying(!isPlaying);
     }
   };
+
+  // Whenever the current song changes and the
+  // status is playing, automatically play the new song
+  useEffect(() => {
+    if (isPlaying && audioRef.current.paused) {
+      audioRef.current.play();
+    }
+  }, [isPlaying, currentSong]);
 
   // onTimeUpdate on audio tag gives us event that we can extract the current time in the song and also the duration
   const timeUpdateHandler = (e) => {

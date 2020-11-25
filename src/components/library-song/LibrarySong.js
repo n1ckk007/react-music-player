@@ -1,9 +1,9 @@
 import React from "react";
 import "./LibrarySong.scss";
 
-const LibrarySong = ({ song, setCurrentSong }) => {
+const LibrarySong = ({ song, songs, setCurrentSong }) => {
   const songSelectHandler = () => {
-    // sets current song to the song that we click on
+    // sets current song to the selected song
     setCurrentSong(song);
   };
 
