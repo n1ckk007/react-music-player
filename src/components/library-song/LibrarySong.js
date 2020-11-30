@@ -1,14 +1,33 @@
 import React from "react";
 import "./LibrarySong.scss";
 
-const LibrarySong = ({ song, songs, setCurrentSong }) => {
+const LibrarySong = ({ song, songs, setCurrentSong, id, setSongs }) => {
   const songSelectHandler = () => {
     // sets current song to the selected song
     setCurrentSong(song);
+    // add active state
+    const newSongs = songs.map((song) => {
+      if (song.id === id) {
+        return {
+          ...song,
+          active: true,
+        };
+      } else {
+        return {
+          ...song,
+          active: false,
+        };
+      }
+    });
+    setSongs(newSongs);
   };
 
   return (
-    <div onClick={songSelectHandler} className="library-song">
+    <div
+      onClick={songSelectHandler}
+      // if song is active added the selected class
+      className={`library-song ${song.active ? "selected" : ""}`}
+    >
       <img src={song.cover} alt={song.name} />
       <div className="song-description">
         <h3>{song.name}</h3>

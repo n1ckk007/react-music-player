@@ -25,6 +25,7 @@ function App() {
         songs={songs}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
+        setSongs={setSongs}
       />
     </div>
   );

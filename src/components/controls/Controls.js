@@ -67,7 +67,8 @@ const Controls = ({ currentSong, isPlaying, setIsPlaying }) => {
         <p>{getTime(songInfo.currentTime)}</p>
         <input
           min={0}
-          max={songInfo.duration}
+          // add a default value to prevent the NaN error; song duration or 0
+          max={songInfo.duration || 0}
           value={songInfo.currentTime}
           type="range"
           // everytime we move slider this event will run
