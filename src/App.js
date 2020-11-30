@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.scss";
 import Controls from "./components/controls/Controls";
 import Library from "./components/library/Library";
+import Nav from "./components/nav/Nav";
 import Song from "./components/song/Song";
 import data from "./data";
 
@@ -12,9 +13,12 @@ function App() {
   const [currentSong, setCurrentSong] = useState(songs[0]);
   // state for if the music is playing
   const [isPlaying, setIsPlaying] = useState(false);
+  // state for if library is open
+  const [libraryStatus, setLibraryStatus] = useState(false);
 
   return (
     <div className="App">
+      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} />
       <Controls
         isPlaying={isPlaying}
@@ -26,6 +30,7 @@ function App() {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         setSongs={setSongs}
+        libraryStatus={libraryStatus}
       />
     </div>
   );

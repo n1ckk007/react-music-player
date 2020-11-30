@@ -74,7 +74,7 @@ const Controls = ({ currentSong, isPlaying, setIsPlaying }) => {
           // everytime we move slider this event will run
           onChange={dragHandler}
         />
-        <p>{getTime(songInfo.duration)}</p>
+        <p>{getTime(songInfo.duration || 0)}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
