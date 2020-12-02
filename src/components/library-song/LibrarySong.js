@@ -1,7 +1,14 @@
 import React from "react";
 import "./LibrarySong.scss";
 
-const LibrarySong = ({ song, songs, setCurrentSong, id, setSongs }) => {
+const LibrarySong = ({
+  song,
+  songs,
+  setCurrentSong,
+  id,
+  setSongs,
+  currentSong,
+}) => {
   const songSelectHandler = () => {
     // sets current song to the selected song
     setCurrentSong(song);
@@ -25,8 +32,10 @@ const LibrarySong = ({ song, songs, setCurrentSong, id, setSongs }) => {
   return (
     <div
       onClick={songSelectHandler}
-      // if song is active added the selected class
-      className={`library-song ${song.active ? "selected" : ""}`}
+      // // if song is active added the selected class
+      // className={`library-song ${song.active ? "selected" : ""}`}
+      // avoid the need for updating the active song in the library, use the following code instead of checking adding the class based on 'song.active':
+      className={`library-song ${song.id === currentSong.id ? "selected" : ""}`}
     >
       <img src={song.cover} alt={song.name} />
       <div className="song-description">
