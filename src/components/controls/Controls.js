@@ -75,20 +75,41 @@ const Controls = ({
     // setSongInfo({ ...songInfo, currentTime: e.target.value });
   };
 
+  const songEndHandler = async () => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    return;
+  };
+
   return (
     <div className="controls-container">
       <div className="time-control">
         {/* envoke the getTime func and pass down current time */}
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          min={0}
-          // add a default value to prevent the NaN error; song duration or 0
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          type="range"
-          // everytime we move slider this event will run
-          onChange={dragHandler}
-        />
+        <div
+          className="track"
+          style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+          }}
+        >
+          <input
+            min={0}
+            // add a default value to prevent the NaN error; song duration or 0
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            type="range"
+            // everytime we move slider this event will run
+            onChange={dragHandler}
+          />
+          <div
+            className="animate-track"
+            style={{
+              transform: `translateX(${
+                (songInfo.currentTime / songInfo.duration) * 100
+              }%)`,
+            }}
+          ></div>
+        </div>
         <p>{getTime(songInfo.duration || 0)}</p>
       </div>
       <div className="play-control">
@@ -118,6 +139,8 @@ const Controls = ({
         onLoadedMetadata={timeUpdateHandler}
         ref={audioRef}
         src={currentSong.audio}
+        // runs this when the song ends
+        onEnded={songEndHandler}
       ></audio>
     </div>
   );
