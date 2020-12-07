@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import Controls from "./components/controls/Controls";
 import Library from "./components/library/Library";
@@ -15,9 +15,22 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   // state for if library is open
   const [libraryStatus, setLibraryStatus] = useState(false);
+  // for the search bar
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState(songs);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const searchResults = songs.filter((song) =>
+      song.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(searchResults);
+  }, [searchTerm]);
 
   return (
-    <div className={`app ${libraryStatus ? 'library-active' : ''}`}>
+    <div className={`app ${libraryStatus ? "library-active" : ""}`}>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} />
       <Controls
@@ -28,11 +41,15 @@ function App() {
         setCurrentSong={setCurrentSong}
       />
       <Library
-        songs={songs}
+        songs={songs.length < 1 ? songs : searchResults}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         setSongs={setSongs}
         libraryStatus={libraryStatus}
+        searchTerm={searchTerm}
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
+        handleChange={handleChange}
       />
     </div>
   );

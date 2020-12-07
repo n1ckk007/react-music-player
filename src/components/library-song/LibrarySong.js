@@ -1,32 +1,10 @@
 import React from "react";
 import "./LibrarySong.scss";
 
-const LibrarySong = ({
-  song,
-  songs,
-  setCurrentSong,
-  id,
-  setSongs,
-  currentSong,
-}) => {
+const LibrarySong = ({ song, setCurrentSong, currentSong }) => {
   const songSelectHandler = () => {
     // sets current song to the selected song
     setCurrentSong(song);
-    // add active state
-    const newSongs = songs.map((song) => {
-      if (song.id === id) {
-        return {
-          ...song,
-          active: true,
-        };
-      } else {
-        return {
-          ...song,
-          active: false,
-        };
-      }
-    });
-    setSongs(newSongs);
   };
 
   return (
