@@ -27,7 +27,7 @@ function App() {
       song.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(searchResults);
-  }, [searchTerm]);
+  }, [songs, searchTerm]);
 
   return (
     <div className={`app ${libraryStatus ? "library-active" : ""}`}>
