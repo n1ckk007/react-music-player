@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./search-box.scss";
 
 const SearchBox = ({ handleChange, searchTerm }) => {
